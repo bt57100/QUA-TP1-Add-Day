@@ -16,17 +16,18 @@ public class NextDayTest {
     private MyDate endDec;
     private MyDate strJan;
     private MyDate sndJan;
+    private MyDate endJan;
     private MyDate endMar;
     private MyDate strAvr;
     private MyDate sndAvr;
     private MyDate endAvr;
     private MyDate strMai;
-    private MyDate strBisFev;
-    private MyDate strNoBisFev;
-    private MyDate sndBisFev;
-    private MyDate sndNoBisFev;
-    private MyDate endBisFev;
-    private MyDate endNoBisFev;
+    private MyDate strBisFeb;
+    private MyDate strNoBisFeb;
+    private MyDate sndBisFeb;
+    private MyDate sndNoBisFeb;
+    private MyDate endBisFeb;
+    private MyDate endNoBisFeb;
     private MyDate strBisMar;
     private MyDate strNoBisMar;
 
@@ -38,17 +39,18 @@ public class NextDayTest {
         endDec = new MyDate(31, 12, 2000);
         strJan = new MyDate(1, 1, 2001);
         sndJan = new MyDate(2, 1, 2001);
+        endJan = new MyDate(31, 1, 2000);
         endMar = new MyDate(31, 3, 2000);
         strAvr = new MyDate(1, 4, 2000);
         sndAvr = new MyDate(2, 4, 2000);
         endAvr = new MyDate(30, 4, 2000);
         strMai = new MyDate(1, 5, 2000);
-        strBisFev = new MyDate(1, 2, 2000);
-        strNoBisFev = new MyDate(1, 2, 1999);
-        sndBisFev = new MyDate(2, 2, 2000);
-        sndNoBisFev = new MyDate(2, 2, 1999);
-        endBisFev = new MyDate(29, 2, 2000);
-        endNoBisFev = new MyDate(28, 2, 1999);
+        strBisFeb = new MyDate(1, 2, 2000);
+        strNoBisFeb = new MyDate(1, 2, 1999);
+        sndBisFeb = new MyDate(2, 2, 2000);
+        sndNoBisFeb = new MyDate(2, 2, 1999);
+        endBisFeb = new MyDate(29, 2, 2000);
+        endNoBisFeb = new MyDate(28, 2, 1999);
         strBisMar = new MyDate(1, 3, 2000);
         strNoBisMar = new MyDate(1, 3, 1999);
     }
@@ -63,22 +65,16 @@ public class NextDayTest {
         assertTrue("NOK addOneDayToDate for " + endMar.toString(), DateComputor.addOneDayToDate(endMar).toString().equals(strAvr.toString()));
         assertTrue("NOK addOneDayToDate for " + strAvr.toString(), DateComputor.addOneDayToDate(strAvr).toString().equals(sndAvr.toString()));
         assertTrue("NOK addOneDayToDate for " + endAvr.toString(), DateComputor.addOneDayToDate(endAvr).toString().equals(strMai.toString()));
-
-        assertTrue("NOK addOneDayToDate for " + endBisFev.toString(), DateComputor.addOneDayToDate(endBisFev).toString().equals(strBisMar.toString()));
-        assertTrue("NOK addOneDayToDate for " + endNoBisFev.toString(), DateComputor.addOneDayToDate(endNoBisFev).toString().equals(strNoBisMar.toString()));
-        assertTrue("NOK addOneDayToDate for " + strBisFev.toString(), DateComputor.addOneDayToDate(strBisFev).toString().equals(sndBisFev.toString()));
-        assertTrue("NOK addOneDayToDate for " + strNoBisFev.toString(), DateComputor.addOneDayToDate(sndNoBisFev).toString().equals(sndNoBisFev.toString()));
+        assertTrue("NOK addOneDayToDate for " + endBisFeb.toString(), DateComputor.addOneDayToDate(endBisFeb).toString().equals(strBisMar.toString()));
+        assertTrue("NOK addOneDayToDate for " + endNoBisFeb.toString(), DateComputor.addOneDayToDate(endNoBisFeb).toString().equals(strNoBisMar.toString()));
+        assertTrue("NOK addOneDayToDate for " + strBisFeb.toString(), DateComputor.addOneDayToDate(strBisFeb).toString().equals(sndBisFeb.toString()));
+        assertTrue("NOK addOneDayToDate for " + strNoBisFeb.toString(), DateComputor.addOneDayToDate(sndNoBisFeb).toString().equals(sndNoBisFeb.toString()));
     }
 
     @Test
-    public void addOneMonthTest() {
-    	MyDate endJan = new MyDate(31, 1, 2000); 
-    	MyDate strFeb = new MyDate(1, 2, 2000); 
-    	MyDate endDec = new MyDate(31, 12, 2000);
-    	MyDate strJan = new MyDate(1, 1, 2001); 
-    	
-    	assertTrue("NOK addOneMonth for 0", DateComputor.addOneMonth(endJan).toString().equals(strFeb.toString()));
-    	assertTrue("NOK addOneMonth for 0", DateComputor.addOneMonth(endDec).toString().equals(strJan.toString()));
+    public void addOneMonthTest() {    	
+    	assertTrue("NOK addOneMonth for " + endJan.toString(), DateComputor.addOneMonth(endJan).toString().equals(strBisFeb.toString()));
+    	assertTrue("NOK addOneMonth for " + endDec.toString(), DateComputor.addOneMonth(endDec).toString().equals(strJan.toString()));
     }
     
     @Test
