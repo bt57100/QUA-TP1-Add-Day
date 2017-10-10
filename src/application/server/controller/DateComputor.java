@@ -10,9 +10,9 @@ import application.server.model.MyDate;
  * @author Kevin
  */
 public class DateComputor {
-
+	
     /* Month with 30 or 31 days */
-    private static final Integer[] THIRRTY_ONE_DAY_MONTH = {1, 3, 5, 7, 8, 10};
+    private static final Integer[] THIRTY_ONE_DAY_MONTH = {1, 3, 5, 7, 8, 10};
     private static final Integer[] THIRTY_DAY_MONTH = {4, 6, 9, 11};
 
     /**
@@ -26,7 +26,7 @@ public class DateComputor {
             if ((date.getMonth() == 2 && !isBissextile(date.getYear()) && date.getDay() < 28)
                     || (date.getMonth() == 2 && isBissextile(date.getYear()) && date.getDay() < 29)
                     || (Arrays.asList(THIRTY_DAY_MONTH).contains(date.getMonth()) && date.getDay() < 30)
-                    || (Arrays.asList(THIRRTY_ONE_DAY_MONTH).contains(date.getMonth()) && date.getDay() < 31)) {
+                    || (Arrays.asList(THIRTY_ONE_DAY_MONTH).contains(date.getMonth()) && date.getDay() < 31)) {
                 addOneDay(date);
             } else {
                 addOneMonth(date);
@@ -40,7 +40,7 @@ public class DateComputor {
      *
      * @param date
      */
-    private static void addOneDay(MyDate date) {
+    public static void addOneDay(MyDate date) {
         date.setDay(date.getDay() + 1);
     }
 
@@ -50,7 +50,7 @@ public class DateComputor {
      *
      * @param date
      */
-    private static void addOneMonth(MyDate date) {
+    public static MyDate addOneMonth(MyDate date) {
         date.setDay(1);
         if (date.getMonth() < 12) {
             date.setMonth(date.getMonth() + 1);
@@ -58,6 +58,7 @@ public class DateComputor {
             date.setMonth(1);
             addOneYear(date);
         }
+        return date;
     }
 
     /**
@@ -65,7 +66,7 @@ public class DateComputor {
      *
      * @param date
      */
-    private static void addOneYear(MyDate date) {
+    public static void addOneYear(MyDate date) {
         date.setYear(date.getYear() + 1);
     }
 
@@ -75,7 +76,7 @@ public class DateComputor {
      * @param year
      * @return 1 if bissextile else 0
      */
-    private static boolean isBissextile(int year) {
+    public static boolean isBissextile(int year) {
         return year % 4 == 0;
     }
 
@@ -85,9 +86,9 @@ public class DateComputor {
      * @param date
      * @return 1 if valid else 0
      */
-    private static boolean isValid(MyDate date) {
+    public static boolean isValid(MyDate date) {
         return isDayValid(date.getDay())
-                && isMonthValid(date.getMonth(), date.getYear())
+                && isMonthValid(date.getDay(), date.getMonth())
                 && isYearValid(date.getDay(), date.getMonth(), date.getYear());
     }
 
@@ -97,7 +98,7 @@ public class DateComputor {
      * @param day
      * @return 1 if valid else 0
      */
-    private static boolean isDayValid(int day) {
+    public static boolean isDayValid(int day) {
         return (day > 0 && day < 32);
     }
 
@@ -108,16 +109,16 @@ public class DateComputor {
      * @param month
      * @return 1 if valid else 0
      */
-    private static boolean isMonthValid(int day, int month) {
+    public static boolean isMonthValid(int day, int month) {
         boolean valid = true;
-        if (Arrays.asList(THIRTY_DAY_MONTH).contains(month)) {
-            if (day > 30) {
-                valid = false;
-            }
-        } else if ((Arrays.asList(THIRRTY_ONE_DAY_MONTH).contains(month))) {
-            if (day > 31) {
-                valid = false;
-            }
+        if (Arrays.asList(THIRTY_DAY_MONTH).contains(month) && (day > 30)) {
+            valid = false;
+        } else if ((Arrays.asList(THIRTY_ONE_DAY_MONTH).contains(month)) && (day > 31)) {
+            valid = false;
+        } else if ((month == 2) && (day > 29)) {
+            valid = false;
+        } else if ((month < 1) || (month > 12)) {
+        	valid = false;
         }
         return valid;
     }
@@ -130,7 +131,7 @@ public class DateComputor {
      * @param year
      * @return 1 if valid else 0
      */
-    private static boolean isYearValid(int day, int month, int year) {
+    public static boolean isYearValid(int day, int month, int year) {
         boolean valid = true;
         if (month == 2) {
             if (!isBissextile(year) && (day > 28)) {
